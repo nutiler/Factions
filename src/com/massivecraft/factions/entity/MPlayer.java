@@ -3,6 +3,7 @@ package com.massivecraft.factions.entity;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -20,12 +21,14 @@ import com.massivecraft.factions.event.EventFactionsChunkChangeType;
 import com.massivecraft.factions.event.EventFactionsChunksChange;
 import com.massivecraft.factions.event.EventFactionsDisband;
 import com.massivecraft.factions.event.EventFactionsMembershipChange;
-import com.massivecraft.factions.event.EventFactionsRemovePlayerMillis;
 import com.massivecraft.factions.event.EventFactionsMembershipChange.MembershipChangeReason;
+import com.massivecraft.factions.event.EventFactionsRemovePlayerMillis;
 import com.massivecraft.factions.mixin.PowerMixin;
 import com.massivecraft.factions.util.RelationUtil;
+import com.massivecraft.massivecore.collections.MassiveList;
 import com.massivecraft.massivecore.mixin.MixinSenderPs;
 import com.massivecraft.massivecore.mixin.MixinTitle;
+import com.massivecraft.massivecore.mson.Mson;
 import com.massivecraft.massivecore.ps.PS;
 import com.massivecraft.massivecore.ps.PSFormatHumanSpace;
 import com.massivecraft.massivecore.store.SenderEntity;
@@ -659,6 +662,29 @@ public class MPlayer extends SenderEntity<MPlayer> implements EconomyParticipato
 	public String getNameAndTitle(MPlayer mplayer)
 	{
 		return this.getNameAndTitle(this.getColorTo(mplayer).toString());
+	}
+
+	// -------------------------------------------- //
+	// TOOLTIP
+	// -------------------------------------------- //
+
+	public Mson getNameAndTitleWithTooltip(MPlayer mplayer)
+	{
+		return Mson.fromParsedMessage(this.getNameAndTitle(mplayer))
+			.tooltip(this.getTooltip(mplayer));
+	}
+
+	public List<String> getTooltip(RelationParticipator observer)
+	{
+		List<String> ret = new MassiveList<>();
+
+		// INFO: Faction
+		ret.add(Txt.parse("<k>Faction: <v>%s", this.getFaction().getName(observer)));
+
+		// INFO: Power (as digits)
+		ret.add(Txt.parse("<k>Power: <v>%.2f / %.2f", this.getPower(), this.getPowerMax()));
+
+		return ret;
 	}
 
 	// -------------------------------------------- //

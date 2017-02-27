@@ -34,6 +34,7 @@ import com.massivecraft.massivecore.collections.MassiveTreeSetDef;
 import com.massivecraft.massivecore.comparator.ComparatorCaseInsensitive;
 import com.massivecraft.massivecore.mixin.MixinMessage;
 import com.massivecraft.massivecore.money.Money;
+import com.massivecraft.massivecore.mson.Mson;
 import com.massivecraft.massivecore.predicate.Predicate;
 import com.massivecraft.massivecore.predicate.PredicateAnd;
 import com.massivecraft.massivecore.predicate.PredicateVisibleTo;
@@ -42,6 +43,8 @@ import com.massivecraft.massivecore.store.Entity;
 import com.massivecraft.massivecore.store.SenderColl;
 import com.massivecraft.massivecore.util.IdUtil;
 import com.massivecraft.massivecore.util.MUtil;
+import com.massivecraft.massivecore.util.TimeDiffUtil;
+import com.massivecraft.massivecore.util.TimeUnit;
 import com.massivecraft.massivecore.util.Txt;
 
 public class Faction extends Entity<Faction> implements EconomyParticipator, Named
@@ -333,6 +336,11 @@ public class Faction extends Entity<Faction> implements EconomyParticipator, Nam
 	public long getCreatedAtMillis()
 	{
 		return this.createdAtMillis;
+	}
+
+	public long getAgeMillis()
+	{
+		return System.currentTimeMillis() - this.getCreatedAtMillis();
 	}
 	
 	public void setCreatedAtMillis(long createdAtMillis)
@@ -926,7 +934,59 @@ public class Faction extends Entity<Faction> implements EconomyParticipator, Nam
 	{
 		return RelationUtil.getColorOfThatToMe(this, observer);
 	}
-	
+
+	// -------------------------------------------- //
+	// TOOLTIP
+	// -------------------------------------------- //
+
+	public Mson getNameWithTooltip(MPlayer observer)
+	{
+		String visual = this.getName(observer);
+		Mson ret = Mson.fromParsedMessage(visual);
+		ret = ret.tooltip(this.getTooltip(observer));
+		return ret;
+	}
+
+	public List<String> getTooltip(MPlayer observer)
+	{
+		List<String> ret = new MassiveList<>();
+
+		// ID
+		if (observer.isOverriding())
+		{
+			ret.add(Txt.parse("<k>ID: <v>%s", this.getId()));
+		}
+
+		// Description
+		ret.add(Txt.parse("<k>Description: <v>%s", this.getDescription()));
+
+		if (this.isNormal())
+		{
+			// Age
+			long ageMillis = this.getAgeMillis();
+			LinkedHashMap<TimeUnit, Long> ageUnitcounts = TimeDiffUtil.limit(TimeDiffUtil.unitcounts(ageMillis, TimeUnit.getAllButMillis()), 3);
+			String ageDesc = TimeDiffUtil.formatedVerboose(ageUnitcounts, "<i>");
+			ret.add(Txt.parse("<k>Age: <v>%s", ageDesc));
+
+			// Power
+			double powerBoost = this.getPowerBoost();
+			String boost = (powerBoost == 0.0) ? "" : (powerBoost > 0.0 ? " (bonus: " : " (penalty: ") + powerBoost + ")";
+			String powerDesc = Txt.parse("%d/%d/%d%s", this.getLandCount(), this.getPowerRounded(), this.getPowerMaxRounded(), boost);
+			ret.add(Txt.parse("<k>Land / Power / Maxpower: <v>", powerDesc));
+		}
+
+		// Followers
+		int followersOnline = this.getMPlayersWhereOnlineTo(observer).size();
+		ret.add(Txt.parse("<k>Online followers: <v>%d", followersOnline));
+		if (isNormal())
+		{
+			int followersOffline = this.getMPlayers().size() - followersOnline;
+			ret.add(Txt.parse("<k>Offline followers: <v>%d", followersOnline));
+		}
+
+		return ret;
+	}
+
 	// -------------------------------------------- //
 	// POWER
 	// -------------------------------------------- //

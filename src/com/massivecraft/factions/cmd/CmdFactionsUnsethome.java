@@ -1,5 +1,7 @@
 package com.massivecraft.factions.cmd;
 
+import org.bukkit.ChatColor;
+
 import com.massivecraft.factions.Perm;
 import com.massivecraft.factions.cmd.type.TypeFaction;
 import com.massivecraft.factions.entity.Faction;
@@ -7,6 +9,7 @@ import com.massivecraft.factions.entity.MPerm;
 import com.massivecraft.factions.event.EventFactionsHomeChange;
 import com.massivecraft.massivecore.MassiveException;
 import com.massivecraft.massivecore.command.requirement.RequirementHasPerm;
+import com.massivecraft.massivecore.mson.Mson;
 
 public class CmdFactionsUnsethome extends FactionsCommandHome
 {
@@ -58,7 +61,12 @@ public class CmdFactionsUnsethome extends FactionsCommandHome
 		faction.msg("%s<i> unset the home for your faction.", msender.describeTo(msenderFaction, true));
 		if (faction != msenderFaction)
 		{
-			msender.msg("<i>You have unset the home for " + faction.getName(msender) + "<i>.");
+			Mson message = mson(
+				"You have unset the home for ",
+				faction.getNameWithTooltip(msender),
+				Mson.DOT
+			).color(ChatColor.YELLOW);
+			message(message);
 		}
 	}
 	

@@ -1,5 +1,7 @@
 package com.massivecraft.factions.cmd;
 
+import org.bukkit.ChatColor;
+
 import com.massivecraft.factions.Perm;
 import com.massivecraft.factions.cmd.type.TypeFaction;
 import com.massivecraft.factions.entity.Faction;
@@ -8,6 +10,7 @@ import com.massivecraft.factions.event.EventFactionsHomeChange;
 import com.massivecraft.massivecore.MassiveException;
 import com.massivecraft.massivecore.command.requirement.RequirementHasPerm;
 import com.massivecraft.massivecore.command.requirement.RequirementIsPlayer;
+import com.massivecraft.massivecore.mson.Mson;
 import com.massivecraft.massivecore.ps.PS;
 
 public class CmdFactionsSethome extends FactionsCommandHome
@@ -65,7 +68,12 @@ public class CmdFactionsSethome extends FactionsCommandHome
 		faction.sendMessage(CmdFactions.get().cmdFactionsHome.getTemplate());
 		if (faction != msenderFaction)
 		{
-			msender.msg("<i>You have set the home for " + faction.getName(msender) + "<i>.");
+			Mson message = mson(
+				"You have set the home for ",
+				faction.getNameWithTooltip(msender),
+				Mson.DOT
+			).color(ChatColor.YELLOW);
+			message(message);
 		}
 	}
 	

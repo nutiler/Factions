@@ -65,17 +65,30 @@ public class CmdFactionsJoin extends FactionsCommand
 			// Mson creation
 			Mson alreadyMember = Mson.mson(
 				Mson.parse(mplayer.describeTo(msender, true)),
-				mson((samePlayer ? " are" : " is") + " already a member of " + faction.getName(msender) + ".").color(ChatColor.YELLOW)
+				mson((
+					samePlayer ? " are" : " is"),
+					" already a member of ",
+					faction.getNameWithTooltip(msender),
+					Mson.DOT
+					).color(ChatColor.YELLOW)
 			);
-			
-			message(alreadyMember.suggest(command).tooltip(Txt.parse("<i>Click to <c>%s<i>.", command)));
-			return;
+			alreadyMember.suggest(command);
+			throw new MassiveException().addMessage(alreadyMember);
 		}
 
 		if (MConf.get().factionMemberLimit > 0 && faction.getMPlayers().size() >= MConf.get().factionMemberLimit)
 		{
-			msg(" <b>!<white> The faction %s is at the limit of %d members, so %s cannot currently join.", faction.getName(msender), MConf.get().factionMemberLimit, mplayer.describeTo(msender, false));
-			return;
+			Mson error = mson(
+				mson(" !").color(ChatColor.RED),
+				" The faction ",
+				faction.getNameWithTooltip(msender),
+				" is at the limit of",
+				String.valueOf(MConf.get().factionMemberLimit),
+				" members, so ",
+				mplayer.describeTo(msender, false),
+				" cannot currently join."
+			);
+			throw new MassiveException().addMessage(error);
 		}
 
 		if (mplayerFaction.isNormal())
@@ -116,10 +129,23 @@ public class CmdFactionsJoin extends FactionsCommand
 		// Inform
 		if (!samePlayer)
 		{
-			mplayer.msg("<i>%s <i>moved you into the faction %s<i>.", msender.describeTo(mplayer, true), faction.getName(mplayer));
+			Mson message = mson(
+				msender.describeTo(mplayer, true),
+				" moved you into the faction ",
+				faction.getNameWithTooltip(mplayer),
+				Mson.DOT
+			).color(ChatColor.YELLOW);
+			mplayer.message(message);
 		}
 		faction.msg("<i>%s <i>joined <lime>your faction<i>.", mplayer.describeTo(faction, true));
-		msender.msg("<i>%s <i>successfully joined %s<i>.", mplayer.describeTo(msender, true), faction.getName(msender));
+
+		Mson message = mson(
+			mplayer.describeTo(msender, true),
+			" successfully joined ",
+			faction.getNameWithTooltip(mplayer),
+			Mson.DOT
+		).color(ChatColor.YELLOW);
+		msender.message(message);
 		
 		// Apply
 		mplayer.resetFactionData();

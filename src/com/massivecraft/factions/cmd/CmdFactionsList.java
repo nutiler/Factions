@@ -14,9 +14,9 @@ import com.massivecraft.factions.entity.MPlayer;
 import com.massivecraft.massivecore.MassiveException;
 import com.massivecraft.massivecore.command.Parameter;
 import com.massivecraft.massivecore.command.requirement.RequirementHasPerm;
+import com.massivecraft.massivecore.mson.Mson;
+import com.massivecraft.massivecore.pager.Msonifier;
 import com.massivecraft.massivecore.pager.Pager;
-import com.massivecraft.massivecore.pager.Stringifier;
-import com.massivecraft.massivecore.util.Txt;
 
 public class CmdFactionsList extends FactionsCommand
 {
@@ -52,24 +52,26 @@ public class CmdFactionsList extends FactionsCommand
 		// We run it asynchronously to spare the primary server thread.
 		
 		// Pager Create
-		final Pager<Faction> pager = new Pager<>(this, "Faction List", page, new Stringifier<Faction>() {
+		final Pager<Faction> pager = new Pager<>(this, "Faction List", page, new Msonifier<Faction>() {
 			@Override
-			public String toString(Faction faction, int index)
+			public Mson toMson(Faction faction, int index)
 			{
 				if (faction.isNone())
 				{
-					return Txt.parse("<i>Factionless<i> %d online", FactionColl.get().getNone().getMPlayersWhereOnlineTo(sender).size());
+					return Mson.parse("<i>Factionless<i> %d online", FactionColl.get().getNone().getMPlayersWhereOnlineTo(sender).size());
 				}
 				else
 				{
-					return Txt.parse("%s<i> %d/%d online, %d/%d/%d",
-						faction.getName(msender),
+					Mson name = faction.getNameWithTooltip(msender);
+					Mson rest = Mson.parse("<i> %d/%d online, %d/%d/%d",
 						faction.getMPlayersWhereOnlineTo(sender).size(),
 						faction.getMPlayers().size(),
 						faction.getLandCount(),
 						faction.getPowerRounded(),
 						faction.getPowerMaxRounded()
 					);
+
+					return Mson.mson(name, rest);
 				}
 			}
 		});

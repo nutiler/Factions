@@ -15,6 +15,7 @@ import com.massivecraft.massivecore.MassiveCore;
 import com.massivecraft.massivecore.MassiveException;
 import com.massivecraft.massivecore.command.type.TypeAbstract;
 import com.massivecraft.massivecore.comparator.ComparatorCaseInsensitive;
+import com.massivecraft.massivecore.mson.Mson;
 import com.massivecraft.massivecore.util.IdUtil;
 
 public class TypeFaction extends TypeAbstract<Faction>
@@ -32,9 +33,9 @@ public class TypeFaction extends TypeAbstract<Faction>
 	// -------------------------------------------- //
 	
 	@Override
-	public String getVisualInner(Faction value, CommandSender sender)
+	public Mson getVisualMsonInner(Faction value, CommandSender sender)
 	{
-		return value.describeTo(MPlayer.get(sender));
+		return value.getNameWithTooltip(MPlayer.get(sender));
 	}
 
 	@Override
@@ -79,7 +80,7 @@ public class TypeFaction extends TypeAbstract<Faction>
 	@Override
 	public Collection<String> getTabList(CommandSender sender, String arg)
 	{
-		Set<String> ret = new TreeSet<String>(ComparatorCaseInsensitive.get());
+		Set<String> ret = new TreeSet<>(ComparatorCaseInsensitive.get());
 		
 		for (Faction faction : FactionColl.get().getAll())
 		{

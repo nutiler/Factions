@@ -22,6 +22,7 @@ import com.massivecraft.massivecore.Engine;
 import com.massivecraft.massivecore.collections.MassiveList;
 import com.massivecraft.massivecore.collections.MassiveSet;
 import com.massivecraft.massivecore.mixin.MixinWorld;
+import com.massivecraft.massivecore.mson.Mson;
 import com.massivecraft.massivecore.ps.PS;
 import com.massivecraft.massivecore.util.Txt;
 
@@ -239,7 +240,11 @@ public class EngineChunkChange extends Engine
 			// ... the old faction might not be inflated enough ...
 			if (oldFaction.getPowerRounded() > oldFaction.getLandCount() - oldChunks.size())
 			{
-				mplayer.msg("%s<i> owns this land and is strong enough to keep it.", oldFaction.getName(mplayer));
+				Mson message = Mson.mson(
+					oldFaction.getNameWithTooltip(mplayer),
+					" owns this land and is strong enough to keep it."
+				).color(ChatColor.YELLOW);
+				mplayer.message(message);
 				event.setCancelled(true);
 				return;
 			}

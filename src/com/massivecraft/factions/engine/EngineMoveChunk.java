@@ -1,23 +1,23 @@
 package com.massivecraft.factions.engine;
 
-import com.massivecraft.factions.Const;
-import com.massivecraft.factions.TerritoryAccess;
-import com.massivecraft.factions.entity.BoardColl;
-import com.massivecraft.factions.entity.Faction;
-import com.massivecraft.factions.entity.MConf;
-import com.massivecraft.factions.entity.MPlayer;
-import com.massivecraft.massivecore.Engine;
-import com.massivecraft.massivecore.mixin.MixinTitle;
-import com.massivecraft.massivecore.ps.PS;
-import com.massivecraft.massivecore.util.MUtil;
-import com.massivecraft.massivecore.util.Txt;
+import java.util.Collections;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-import java.util.Collections;
-import java.util.List;
+import com.massivecraft.factions.TerritoryAccess;
+import com.massivecraft.factions.entity.BoardColl;
+import com.massivecraft.factions.entity.Faction;
+import com.massivecraft.factions.entity.MConf;
+import com.massivecraft.factions.entity.MPlayer;
+import com.massivecraft.factions.util.AsciiMap;
+import com.massivecraft.massivecore.Engine;
+import com.massivecraft.massivecore.mixin.MixinTitle;
+import com.massivecraft.massivecore.ps.PS;
+import com.massivecraft.massivecore.util.MUtil;
+import com.massivecraft.massivecore.util.Txt;
 
 public class EngineMoveChunk extends Engine
 {
@@ -63,8 +63,8 @@ public class EngineMoveChunk extends Engine
 		// send host faction info updates
 		if (mplayer.isMapAutoUpdating())
 		{
-			List<Object> message = BoardColl.get().getMap(mplayer, chunkTo, player.getLocation().getYaw(), Const.MAP_WIDTH, Const.MAP_HEIGHT);
-			mplayer.message(message);
+			AsciiMap map = new AsciiMap(mplayer, player.getLocation(), false);
+			mplayer.message(map.render());
 		}
 		else if (factionFrom != factionTo)
 		{

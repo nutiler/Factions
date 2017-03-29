@@ -1,21 +1,19 @@
 package com.massivecraft.factions.entity;
 
-import com.massivecraft.factions.RelationParticipator;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
 import com.massivecraft.factions.TerritoryAccess;
 import com.massivecraft.massivecore.collections.MassiveMap;
 import com.massivecraft.massivecore.collections.MassiveSet;
 import com.massivecraft.massivecore.ps.PS;
 import com.massivecraft.massivecore.store.Coll;
 import com.massivecraft.massivecore.util.MUtil;
-
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 public class BoardColl extends Coll<Board> implements BoardInterface
 {
@@ -300,17 +298,6 @@ public class BoardColl extends Coll<Board> implements BoardInterface
 			if (this.isConnectedPs(ps, faction)) return true;
 		}
 		return false;
-	}
-	
-	// MAP GENERATION
-	
-	@Override
-	public List<Object> getMap(RelationParticipator observer, PS centerPs, double inDegrees, int width, int height)
-	{
-		if (centerPs == null) return null;
-		Board board = this.get(centerPs.getWorld());
-		if (board == null) return null;
-		return board.getMap(observer, centerPs, inDegrees, width, height);
 	}
 	
 	// -------------------------------------------- //

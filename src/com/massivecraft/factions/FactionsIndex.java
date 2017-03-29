@@ -16,7 +16,7 @@ import java.util.WeakHashMap;
  *
  * In the background it's powered by WeakHashMaps and all public methods are synchronized.
  * That should increase thread safety but no thread safety is actually guarranteed.
- * That is because the mplayer.getFaction() method is not threadsafe.
+ * That is because the mplayer.getRelationParticipator() method is not threadsafe.
  * TODO: Something to fix in the future perhaps?
  */
 public class FactionsIndex

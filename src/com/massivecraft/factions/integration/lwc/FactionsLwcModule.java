@@ -5,6 +5,11 @@ import com.griefcraft.model.Protection;
 import com.griefcraft.scripting.JavaModule;
 import com.griefcraft.scripting.event.LWCProtectionInteractEvent;
 import com.griefcraft.scripting.event.LWCProtectionRegisterEvent;
+
+import org.bukkit.Location;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
+
 import com.massivecraft.factions.Factions;
 import com.massivecraft.factions.engine.EnginePermBuild;
 import com.massivecraft.factions.entity.MConf;
@@ -14,9 +19,6 @@ import com.massivecraft.massivecore.ps.PS;
 import com.massivecraft.massivecore.util.IdUtil;
 import com.massivecraft.massivecore.util.SmokeUtil;
 import com.massivecraft.massivecore.util.Txt;
-import org.bukkit.Location;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
 
 @SuppressWarnings("unused")
 public class FactionsLwcModule extends JavaModule
@@ -51,7 +53,7 @@ public class FactionsLwcModule extends JavaModule
 		if ( ! MConf.get().lwcMustHaveBuildRightsToCreate) return;
 		
 		// ... and the player don't have build rights here ...
-		// NOTE: We verbosely check the build rights so that a proper info message is sent 
+		// NOTE: We verbosely check the build rights so that a proper info message is sent
 		if (EnginePermBuild.canPlayerBuildAt(event.getPlayer(), PS.valueOf(event.getBlock()), true)) return;
 		
 		// ... then cancel the event.

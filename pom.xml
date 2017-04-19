@@ -31,11 +31,6 @@
             <groupId>com.massivecraft.massivecore</groupId>
             <artifactId>MassiveCore</artifactId>
         </dependency>
-        <!-- WorldEdit -->
-        <dependency>
-            <groupId>com.sk89q.worldedit</groupId>
-            <artifactId>worldedit-bukkit</artifactId>
-        </dependency>
         <!-- WorldGuard -->
         <dependency>
             <groupId>com.sk89q.worldguard</groupId>
@@ -45,16 +40,6 @@
         <dependency>
             <groupId>net.milkbowl.vault</groupId>
             <artifactId>Vault</artifactId>
-        </dependency>
-        <!-- Herochat -->
-        <dependency>
-            <groupId>com.dthielke.herochat</groupId>
-            <artifactId>Herochat</artifactId>
-        </dependency>
-        <!-- LWC -->
-        <dependency>
-            <groupId>com.griefcraft</groupId>
-            <artifactId>lwc</artifactId>
         </dependency>
     </dependencies>
 

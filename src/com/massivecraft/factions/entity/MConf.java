@@ -458,7 +458,7 @@ public class MConf extends Entity<MConf>
 	public ChatColor colorEnemy = ChatColor.RED;
 	
 	// This one is for example applied to SafeZone since that faction has the pvp flag set to false.
-	public ChatColor colorNoPVP = ChatColor.GOLD;
+	public ChatColor colorNoPVP = ChatColor.GRAY;
 	
 	// This one is for example applied to WarZone since that faction has the friendly fire flag set to true.
 	public ChatColor colorFriendlyFire = ChatColor.DARK_RED;

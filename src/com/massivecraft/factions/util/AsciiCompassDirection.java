@@ -33,7 +33,7 @@ public enum AsciiCompassDirection
 	// -------------------------------------------- //
 	
 	public static final ChatColor ACTIVE = ChatColor.RED;
-	public static final ChatColor INACTIVE = ChatColor.YELLOW;
+	public static final ChatColor INACTIVE = ChatColor.GRAY;
 	
 	// -------------------------------------------- //
 	// CONSTRUCT

@@ -282,7 +282,7 @@ public class MFlag extends Entity<MFlag> implements Prioritized, Registerable, N
 		if (this.isEditable()) return ChatColor.LIGHT_PURPLE;
 		
 		// Return normal
-		return ChatColor.AQUA;
+		return ChatColor.RED;
 	}
 	
 	private String getStateDescription(boolean value, boolean specific)

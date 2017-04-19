@@ -40,7 +40,7 @@ public class CmdFactionsKick extends FactionsCommand
 		if (msender == mplayer)
 		{
 			msg("<b>You can't kick yourself.");
-			message(mson(mson("You might want to: ").color(ChatColor.YELLOW), CmdFactions.get().cmdFactionsLeave.getTemplate(false)));
+			message(mson(mson("You might want to: ").color(ChatColor.GRAY), CmdFactions.get().cmdFactionsLeave.getTemplate(false)));
 			return;
 		}
 		

@@ -140,7 +140,7 @@ public class EngineChunkChange extends Engine
 						String worldsAlready = oldWorlds.size() == 1 ? "world" : "worlds";
 						mplayer.msg("<b>A faction may only be present on <h>%d<b> different %s.", MConf.get().claimedWorldsMax, worldsMax);
 						mplayer.msg("%s<i> is already present on <h>%d<i> %s:", newFaction.describeTo(mplayer), oldWorlds.size(), worldsAlready);
-						mplayer.message(Txt.implodeCommaAndDot(worldNames, ChatColor.YELLOW.toString()));
+						mplayer.message(Txt.implodeCommaAndDot(worldNames, ChatColor.GRAY.toString()));
 						mplayer.msg("<i>Please unclaim bases on other worlds to claim here.");
 
 						event.setCancelled(true);

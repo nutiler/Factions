@@ -75,7 +75,7 @@ public class CmdFactionsRelationSet extends FactionsCommand
 			Mson factionsRelationshipChange = mson(
 				Mson.parse("%s<i> wishes to be %s.", msenderFaction.describeTo(otherFaction, true), colorOne),
 				Mson.SPACE,
-				mson("[Accept]").color(ChatColor.AQUA).command(command, msenderFaction.getName(), newRelation.name())
+				mson("[Accept]").color(ChatColor.RED).command(command, msenderFaction.getName(), newRelation.name())
 			);
 			
 			otherFaction.sendMessage(factionsRelationshipChange);

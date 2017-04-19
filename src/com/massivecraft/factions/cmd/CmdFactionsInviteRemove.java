@@ -67,8 +67,8 @@ public class CmdFactionsInviteRemove extends FactionsCommand
 				String tooltip = Txt.parse("Click to <c>%s<i>.", command);
 				
 				Mson kick = Mson.mson(
-					mson("You might want to kick him. ").color(ChatColor.YELLOW), 
-					mson(ChatColor.RED.toString() + tooltip).tooltip(ChatColor.YELLOW.toString() + tooltip).suggest(command)
+					mson("You might want to kick him. ").color(ChatColor.GRAY), 
+					mson(ChatColor.RED.toString() + tooltip).tooltip(ChatColor.GRAY.toString() + tooltip).suggest(command)
 				);
 				
 				// Inform
@@ -110,8 +110,8 @@ public class CmdFactionsInviteRemove extends FactionsCommand
 				String tooltip = Txt.parse("Click to <c>%s<i>.", command);
 				
 				Mson invite = Mson.mson(
-					mson("You might want to invite him. ").color(ChatColor.YELLOW), 
-					mson(ChatColor.GREEN.toString() + tooltip).tooltip(ChatColor.YELLOW.toString() + tooltip).suggest(command)
+					mson("You might want to invite him. ").color(ChatColor.GRAY), 
+					mson(ChatColor.GREEN.toString() + tooltip).tooltip(ChatColor.GRAY.toString() + tooltip).suggest(command)
 				);
 				
 				// Inform
@@ -132,7 +132,7 @@ public class CmdFactionsInviteRemove extends FactionsCommand
 			Mson factionsRevokeAll = mson(
 				Mson.parse("%s<i> revoked ", msender.describeTo(msenderFaction)),
 				Mson.parse("<i>all <h>%s <i>pending invitations", mplayers.size()).tooltip(names),
-				mson(" from your faction.").color(ChatColor.YELLOW)
+				mson(" from your faction.").color(ChatColor.GRAY)
 			);
 			
 			msenderFaction.sendMessage(factionsRevokeAll);

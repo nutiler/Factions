@@ -70,28 +70,28 @@ public class EngineShow extends Engine
 			String ageDesc = TimeDiffUtil.formatedVerboose(ageUnitcounts, "<i>");
 			show(idPriorityLiness, Const.SHOW_ID_FACTION_AGE, Const.SHOW_PRIORITY_FACTION_AGE, "Age", ageDesc);
 
-			// FLAGS
-			// We display all editable and non default ones. The rest we skip.
-			List<String> flagDescs = new LinkedList<>();
-			for (Entry<MFlag, Boolean> entry : faction.getFlags().entrySet())
-			{
-				final MFlag mflag = entry.getKey();
-				if (mflag == null) continue;
-
-				final Boolean value = entry.getValue();
-				if (value == null) continue;
-
-				if ( ! mflag.isInteresting(value)) continue;
-
-				String flagDesc = Txt.parse(value ? "<g>" : "<b>") + mflag.getName();
-				flagDescs.add(flagDesc);
-			}
-			String flagsDesc = Txt.parse("<silver><italic>default");
-			if ( ! flagDescs.isEmpty())
-			{
-				flagsDesc = Txt.implode(flagDescs, Txt.parse(" <i>| "));
-			}
-			show(idPriorityLiness, Const.SHOW_ID_FACTION_FLAGS, Const.SHOW_PRIORITY_FACTION_FLAGS, "Flags", flagsDesc);
+//			// FLAGS
+//			// We display all editable and non default ones. The rest we skip.
+//			List<String> flagDescs = new LinkedList<>();
+//			for (Entry<MFlag, Boolean> entry : faction.getFlags().entrySet())
+//			{
+//				final MFlag mflag = entry.getKey();
+//				if (mflag == null) continue;
+//
+//				final Boolean value = entry.getValue();
+//				if (value == null) continue;
+//
+//				if ( ! mflag.isInteresting(value)) continue;
+//
+//				String flagDesc = Txt.parse(value ? "<g>" : "<b>") + mflag.getName();
+//				flagDescs.add(flagDesc);
+//			}
+//			String flagsDesc = Txt.parse("<silver><italic>default");
+//			if ( ! flagDescs.isEmpty())
+//			{
+//				flagsDesc = Txt.implode(flagDescs, Txt.parse(" <i>| "));
+//			}
+//			show(idPriorityLiness, Const.SHOW_ID_FACTION_FLAGS, Const.SHOW_PRIORITY_FACTION_FLAGS, "Flags", flagsDesc);
 
 			// POWER
 			double powerBoost = faction.getPowerBoost();
@@ -157,7 +157,7 @@ public class EngineShow extends Engine
 			}
 		}
 
-		String headerOnline = Txt.parse("<a>Followers Online (%s):", followerNamesOnline.size());
+		String headerOnline = Txt.parse("<a>%s Members:", followerNamesOnline.size());
 		followerLines.add(headerOnline);
 		if (followerNamesOnline.isEmpty())
 		{
@@ -170,7 +170,7 @@ public class EngineShow extends Engine
 
 		if (normal)
 		{
-			String headerOffline = Txt.parse("<a>Followers Offline (%s):", followerNamesOffline.size());
+			String headerOffline = Txt.parse("<a>%s Offline:", followerNamesOffline.size());
 			followerLines.add(headerOffline);
 			if (followerNamesOffline.isEmpty())
 			{

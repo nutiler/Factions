@@ -320,7 +320,7 @@ public class MPerm extends Entity<MPerm> implements Prioritized, Registerable, N
 			}
 			else
 			{
-				nameFormat = "<aqua>%s";
+				nameFormat = "<RED>%s";
 			}
 			String name = this.getName();
 			String nameDesc = Txt.parse(nameFormat, name);
@@ -425,7 +425,7 @@ public class MPerm extends Entity<MPerm> implements Prioritized, Registerable, N
 			ret += " ";
 		}
 		
-		String color = "<aqua>";
+		String color = "<RED>";
 		if (!this.isVisible())
 		{
 			color = "<silver>";

@@ -1,8 +1,8 @@
-main: ${project.groupId}.${project.name}
-name: ${project.name}
-version: ${project.version}
-website: ${project.url}
-description: ${project.description}
+main: com.massivecraft.factions.Factions
+name: Factions
+version: 2.10.0
+website: https://www.massivecraft.com/factions
+description: §eFactions allows the players to team up and claim land as their own and start wars with other factions. This way we hope to inspire politics, intrigue, and team spirit. §aCayorion§e from §aMassiveCraft§e is the developer. Feel free to visit us at §bhttps://www.massivecraft.com
 authors: [Cayorion, Madus, Ulumulu1510, MarkehMe, Brettflan]
 depend: [MassiveCore]
 softdepend: [PermissionsEx, Permissions, Essentials, EssentialsChat, HeroChat, iChat, LocalAreaChat, LWC, nChat, ChatManager, AuthMe, Vault, Spout, WorldEdit, WorldGuard, AuthDB, CaptureThePoints, CombatTag]
@@ -15,7 +15,6 @@ permissions:
   factions.access.player: {description: grant player access, with the proper fperm, default: false}
   factions.access.view: {description: view access, default: false}
   factions.override: {description: enable override mode, default: false}
-  factions.basecommand: {description: use factions base command, default: false}
   factions.claim: {description: claim faction territory, default: false}
   factions.claim.one: {description: claim a single chunk, default: false}
   factions.claim.auto: {description: claim as you walk around, default: false}
@@ -59,10 +58,7 @@ permissions:
   factions.perm.set: {description: set perms, default: false}
   factions.perm.show: {description: show perms, default: false}
   factions.player: {description: show player information}
-  factions.powerboost: {description: manage powerboost, default: false}
-  factions.powerboost.faction: {description: show faction powerboost, default: false}
-  factions.powerboost.player: {description: show player powerboost, default: false}
-  factions.powerboost.set: {description: set powerboost, default: false}
+  factions.powerboost: {description: set powerboost, default: false}
   factions.rank: {description: manage/show ranks, default: false}
   factions.rank.show: {description: show rank, default: false}
   factions.rank.action: {description: change rank, default: false}
@@ -88,8 +84,6 @@ permissions:
   factions.unclaim.all: {description: unclaim all faction land, default: false}
   factions.unsethome: {description: unset faction home, default: false}
   factions.unstuck: {description: teleport to nearest wilderness, default: false}
-  factions.config: {description: edit the factions config, default: false}
-  factions.clean: {description: clean the factions database, default: false}
   factions.version: {description: see plugin version, default: false}
 # -------------------------------------------- #
 # STAR NOTATION
@@ -101,7 +95,6 @@ permissions:
       factions.access.player: true
       factions.access.view: true
       factions.override: true
-      factions.basecommand: true
       factions.claim: true
       factions.claim.one: true
       factions.claim.auto: true
@@ -151,9 +144,6 @@ permissions:
       factions.perm.show: true
       factions.player: true
       factions.powerboost: true
-      factions.powerboost.faction: true
-      factions.powerboost.player: true
-      factions.powerboost.set: true
       factions.promote: true
       factions.relation: true
       factions.relation.list: true
@@ -177,8 +167,6 @@ permissions:
       factions.unclaim.all: true
       factions.unsethome: true
       factions.unstuck: true
-      factions.config: true
-      factions.clean: true
       factions.version: true
 # -------------------------------------------- #
 # KITS
@@ -191,13 +179,11 @@ permissions:
     default: false
     children:
       factions.kit.rank2: true
-      factions.config: true
-      factions.clean: true
   factions.kit.rank2:
     default: false
     children:
       factions.kit.rank1: true
-      factions.powerboost.set: true
+      factions.powerboost: true
       factions.join.others: true
       factions.leader.any: true
       factions.officer.any: true
@@ -216,7 +202,6 @@ permissions:
       factions.access.faction: true
       factions.access.player: true
       factions.access.view: true
-      factions.basecommand: true
       factions.claim: true
       factions.claim.one: true
       factions.claim.auto: true
@@ -262,9 +247,6 @@ permissions:
       factions.perm.show: true
       factions.player: true
       factions.promote: true
-      factions.powerboost: true
-      factions.powerboost.faction: true
-      factions.powerboost.player: true
       factions.rank: true
       factions.rank.show: true
       factions.rank.action: true

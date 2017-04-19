@@ -57,7 +57,7 @@ public class CmdFactionsJoin extends FactionsCommand
 			// Mson creation
 			Mson alreadyMember = Mson.mson(
 				Mson.parse(mplayer.describeTo(msender, true)),
-				mson((samePlayer ? " are" : " is") + " already a member of " + faction.getName(msender) + ".").color(ChatColor.YELLOW)
+				mson((samePlayer ? " are" : " is") + " already a member of " + faction.getName(msender) + ".").color(ChatColor.GRAY)
 			);
 			
 			message(alreadyMember.suggest(command).tooltip(Txt.parse("<i>Click to <c>%s<i>.", command)));

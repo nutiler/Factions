@@ -43,7 +43,7 @@ public class CmdFactionsExpansions extends FactionsCommand
 		
 		// URL Suggestion
 		msg("<i>Learn all about expansions in the online documentation:");
-		msg("<aqua>https://www.massivecraft.com/factions");
+		msg("<RED>https://www.massivecraft.com/factions");
 	}
 	
 }

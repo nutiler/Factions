@@ -37,7 +37,7 @@ public class CmdFactionsXPlaceholder extends FactionsCommand
 	{
 		msg("<b>The extension <h>%s <b>isn't installed.", this.extensionName);
 		msg("<g>Learn more and download the extension here:");
-		msg("<aqua>https://www.massivecraft.com/%s", this.extensionName.toLowerCase());
+		msg("<RED>https://www.massivecraft.com/%s", this.extensionName.toLowerCase());
 	}
 	
 }

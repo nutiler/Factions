@@ -13,7 +13,7 @@ public enum EventFactionsChunkChangeType implements Colorized
 	NONE("none", "none", ChatColor.WHITE),
 	BUY("buy", "bought", ChatColor.GREEN),
 	SELL("sell", "sold", ChatColor.GREEN),
-	CONQUER("conquer", "conquered", ChatColor.DARK_GREEN),
+	CONQUER("conquer", "conquered", ChatColor.RED),
 	PILLAGE("pillage", "pillaged", ChatColor.RED),
 	
 	// END OF LIST

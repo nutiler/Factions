@@ -49,17 +49,15 @@ public class CmdFactionsList extends FactionsCommand
 			{
 				if (faction.isNone())
 				{
-					return Txt.parse("<i>Factionless<i> %d online", FactionColl.get().getNone().getMPlayersWhereOnlineTo(sender).size());
+					return Txt.parse("<i>Nomads:<i> %d ", FactionColl.get().getNone().getMPlayersWhereOnlineTo(sender).size());
 				}
 				else
 				{
-					return Txt.parse("%s<i> %d/%d online, %d/%d/%d",
+					return Txt.parse("%s<i> %d:%d Members, Size: %d",
 						faction.getName(msender),
 						faction.getMPlayersWhereOnlineTo(sender).size(),
 						faction.getMPlayers().size(),
-						faction.getLandCount(),
-						faction.getPowerRounded(),
-						faction.getPowerMaxRounded()
+						faction.getLandCount()
 					);
 				}
 			}
